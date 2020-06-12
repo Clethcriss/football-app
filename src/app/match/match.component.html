@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row" *ngIf="!isFetchingMatch">
+    <div class="col-xs-6">
+      <h2>{{ matchDetails.homeTeam.name }} vs {{ matchDetails.awayTeam.name }}</h2>
+      <div class="row" *ngIf="getStatus() === 'LIVE!'">
+        <p *ngIf="getPeriodScore('fullTime')['fullTime']">
+          <strong>Full time: </strong>{{ getPeriodScore('fullTime').homeTeamScore }} : {{ getPeriodScore('fullTime').awayTeamScore }}
+        </p>
+        <p *ngIf="getPeriodScore('halfTime')['halfTime']">
+          <strong>Half time: </strong>{{ getPeriodScore('halfTime').homeTeamScore }} : {{ getPeriodScore('halfTime').awayTeamScore }}
+        </p>
+        <p *ngIf="getPeriodScore('extraTime')['extraTime']">
+          <strong>Extra time: </strong>{{ getPeriodScore('extraTime').homeTeamScore }} : {{ getPeriodScore('extraTime').awayTeamScore }}
+        </p>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="border">
+        <p><strong>Competition: </strong>{{ matchDetails.competition.name }}</p>
+        <p><strong>Date: </strong>{{ matchDetails.utcDate }}</p>
+        <p><strong>Status: </strong>{{ getStatus() }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="isFetchingMatch"><h1>LOADING...</h1></div>
+</div>

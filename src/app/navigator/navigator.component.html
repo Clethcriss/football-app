@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-xs-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Competitions</a></li>
+        <li class="breadcrumb-item" *ngIf="links && links.length > 0">
+          <a [routerLink]="links[0]" >{{ competitionName }}</a>
+        </li>
+        <li class="breadcrumb-item" *ngIf="links && links.length > 1">
+          <a [routerLink]="links[1]">{{ vsTeams }}</a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>

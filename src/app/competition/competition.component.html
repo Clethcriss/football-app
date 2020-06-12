@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 border">
+      <div *ngIf="!isFetchingCompetition">
+        <p>{{ competition.name }}</p>
+        <p><strong>Region: </strong>{{ competition.area.name }}</p>
+        <hr>
+        <label for="current-season">Current Season</label>
+        <div id="current-season">
+          <p><strong>Start Date: </strong>{{ competition.currentSeason.startDate }}</p>
+          <p><strong>End Date: </strong>{{ competition.currentSeason.endDate }}</p>
+          <p *ngIf="competition.currentSeason.currentMatchday"><strong>Current Matchday: </strong>{{ competition.currentSeason.currentMatchday }}</p>
+        </div>
+      </div>
+      <h2 *ngIf="isFetchingCompetition">Loading competition deatils...</h2>
+      <h3 *ngIf="competitionError && !isFetchingCompetition">Opps... some naughty error happened :(</h3>
+    </div>
+    <div class="col-xs-6">
+      <div *ngIf="!isFetchingEvents && events.length > 0">
+        <label for="events">Events</label>
+        <div id="events" class="list-group">
+          <a
+            *ngFor="let match of events"
+            class="list-group-item"
+            [routerLink]="[match.id]"
+          >
+            <p><strong>{{ match.homeTeam.name + ' vs ' + match.awayTeam.name }}</strong></p>
+            <p>Matchday: {{ match.matchDay }}</p>
+            <p>Date: {{ match.utcDate }}</p>
+            <p *ngIf="match.status === 'IN_PLAY' || match.status === 'PAUSED'">LIVE!</p>
+          </a>
+
+        </div>
+      </div>
+      <h2 *ngIf="isFetchingEvents">Loading events...</h2>
+      <h3 *ngIf="!isFetchingEvents && events.length < 1">There are no events for this competition :(</h3>
+      <h3 *ngIf="eventsError && !isFetchingEvents">Opps... some naughty error happened :(</h3>
+    </div>
+  </div>
+</div>

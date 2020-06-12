@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-6">
+    <div class="list-group">
+      <a
+        class="list-group-item"
+        *ngFor="let competition of competitions"
+        [routerLink]="['/' + competition.id]"
+      >
+        <h3>{{ competition.name }}</h3>
+        <p>{{ competition.area }}</p>
+      </a>
+    </div>
+  </div>
+</div>
