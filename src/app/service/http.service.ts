@@ -3,12 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ICompetition } from '../models/competition.interface';
 import { IDetailedMatch, IMatch } from '../models/match.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class HttpService {
-  private apiUrl = 'http://api.football-data.org/v2'
-  private apiKey = 'b978776fd7e84d3088261742ec3081ce';
-  private headers = new HttpHeaders({'X-Auth-Token': this.apiKey})
+  private headers = new HttpHeaders({'X-Auth-Token': environment.apiKey})
   private activeStatuses = ['SCHEDULED', 'IN_PLAY', 'PAUSED'];
 
   constructor(private http: HttpClient) {
@@ -16,7 +15,7 @@ export class HttpService {
 
   fetchCompetition(competitionId: string) {
     return this.http.get(
-      `${this.apiUrl}/competitions/${competitionId}`, {
+      `${environment.apiUrl}/competitions/${competitionId}`, {
         headers: this.headers
       }
     ).pipe(map(responseData => {
@@ -32,7 +31,7 @@ export class HttpService {
 
   fetchEvents(competitionId) {
     return this.http.get(
-      `${this.apiUrl}/competitions/${competitionId}/matches`, {
+      `${environment.apiUrl}/competitions/${competitionId}/matches`, {
         headers: this.headers
       }
     ).pipe(map(responseData => {
@@ -57,7 +56,7 @@ export class HttpService {
 
   fetchEvent(eventId) {
     return this.http.get(
-      `${this.apiUrl}/matches/${eventId}`, {
+      `${environment.apiUrl}/matches/${eventId}`, {
         headers: this.headers
       }
     ).pipe(map(matchData => {
@@ -82,7 +81,7 @@ export class HttpService {
 
   fetchEventTeamsAndCompetitionName(eventId) {
     return this.http.get(
-      `${this.apiUrl}/matches/${eventId}`, {
+      `${environment.apiUrl}/matches/${eventId}`, {
         headers: this.headers
       }
     ).pipe(map(matchData => {
@@ -100,7 +99,7 @@ export class HttpService {
 
   fetchCompetitionName(competitionId) {
     return this.http.get(
-      `${this.apiUrl}/competitions/${competitionId}`, {
+      `${environment.apiUrl}/competitions/${competitionId}`, {
         headers: this.headers
       }
     ).pipe(map(responseData => {
