@@ -4,8 +4,7 @@
       <a
         class="list-group-item"
         *ngFor="let competition of competitions"
-        [routerLink]="['/' + competition.id]"
-      >
+        [routerLink]="['/' + competition.id]">
         <h3>{{ competition.name }}</h3>
         <p>{{ competition.area }}</p>
       </a>

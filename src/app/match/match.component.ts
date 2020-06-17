@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../service/http.service';
 import { IDetailedMatch } from '../models/match.interface';
@@ -10,16 +10,15 @@ import { IDetailedMatch } from '../models/match.interface';
 })
 export class MatchComponent implements OnInit {
 
+  @Output() onSelected = new EventEmitter<{type: string, id:string, name: string}>();
   matchDetails: IDetailedMatch;
   isFetchingMatch = false;
-  routeParams: any;
   error = false;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpService
   ) {
-    this.routeParams = route.snapshot.params;
   }
 
   ngOnInit(): void {
@@ -29,7 +28,7 @@ export class MatchComponent implements OnInit {
       this.matchDetails = eventDetails;
       this.error = false;
       this.isFetchingMatch = false;
-      this.setRouteParams();
+      this.onSelected.emit({type: 'event', id: eventDetails.id.toString(), name: `${eventDetails.homeTeam.name} vs ${eventDetails.awayTeam.name}`});
     }, error => {
       this.error = true;
     });
@@ -54,14 +53,6 @@ export class MatchComponent implements OnInit {
       homeTeamScore,
       awayTeamScore
     }
-  }
 
-  setRouteParams(){
-    this.routeParams = {
-      ...this.routeParams,
-      competitionName: this.matchDetails.competition.name,
-      vsTeams: `${this.matchDetails.homeTeam.name} vs ${this.matchDetails.awayTeam.name}`
-    }
   }
-
 }

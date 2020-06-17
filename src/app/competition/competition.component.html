@@ -22,8 +22,7 @@
           <a
             *ngFor="let match of events"
             class="list-group-item"
-            [routerLink]="[match.id]"
-          >
+            [routerLink]="[match.id]">
             <p><strong>{{ match.homeTeam.name + ' vs ' + match.awayTeam.name }}</strong></p>
             <p>Matchday: {{ match.matchDay }}</p>
             <p>Date: {{ match.utcDate }}</p>
