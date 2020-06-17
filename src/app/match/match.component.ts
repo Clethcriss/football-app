@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../service/http.service';
 import { IDetailedMatch } from '../models/match.interface';
 import { ECrumbData, ICrumbData } from '../models/crumbData.interface';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-match',
@@ -29,7 +30,7 @@ export class MatchComponent implements OnInit, OnDestroy {
     this.fetchData(eventId)
     this.interval = setInterval(() => {
       this.fetchData(eventId);
-    }, 2000);
+    }, environment.fetchDataInterval);
 
   }
 
