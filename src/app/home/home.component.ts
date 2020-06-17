@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ECrumbData, ICrumbData } from '../models/crumbData.interface';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
     {id: '2019', name: 'Serie A', area: 'Italy'},
     {id: '2021', name: 'Premier League', area: 'England'}
   ];
-  @Output() onSelected = new EventEmitter<{type: string, id:string, name: string}>();
+  @Output() onSelected = new EventEmitter<ICrumbData>();
 
   constructor() { }
 
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
     // Had to delay the event emit, otherwise the app-component could break
     // with expression changed after checked error. Not the best solution, needs refactor
     setTimeout(() => {
-      this.onSelected.emit({type: 'home', id: '', name: 'Competitions'});
+      this.onSelected.emit({type: ECrumbData.HOME, id: '', name: 'Competitions'});
     }, 200);
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../service/http.service';
 import { ICompetition } from '../models/competition.interface';
 import { IMatch } from '../models/match.interface';
+import { ECrumbData, ICrumbData } from '../models/crumbData.interface';
 
 @Component({
   selector: 'app-competition',
@@ -11,7 +12,7 @@ import { IMatch } from '../models/match.interface';
 })
 export class CompetitionComponent implements OnInit {
 
-  @Output() onSelected = new EventEmitter<{type: string, id:string, name: string}>();
+  @Output() onSelected = new EventEmitter<ICrumbData>();
   competition: ICompetition;
   events: IMatch[] = [];
   isFetchingCompetition = false;
@@ -35,7 +36,7 @@ export class CompetitionComponent implements OnInit {
       this.competition = competitionData;
       this.competitionError = false;
       this.isFetchingCompetition = false;
-      this.onSelected.emit({type: 'competition', id: competitionData.id.toString(), name: competitionData.name});
+      this.onSelected.emit({type: ECrumbData.COMPETITION, id: competitionData.id.toString(), name: competitionData.name});
     }, error => {
       this.competitionError = true;
     });

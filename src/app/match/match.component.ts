@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../service/http.service';
 import { IDetailedMatch } from '../models/match.interface';
+import { ECrumbData, ICrumbData } from '../models/crumbData.interface';
 
 @Component({
   selector: 'app-match',
@@ -10,7 +11,7 @@ import { IDetailedMatch } from '../models/match.interface';
 })
 export class MatchComponent implements OnInit {
 
-  @Output() onSelected = new EventEmitter<{type: string, id:string, name: string}>();
+  @Output() onSelected = new EventEmitter<ICrumbData>();
   matchDetails: IDetailedMatch;
   isFetchingMatch = false;
   error = false;
@@ -28,7 +29,7 @@ export class MatchComponent implements OnInit {
       this.matchDetails = eventDetails;
       this.error = false;
       this.isFetchingMatch = false;
-      this.onSelected.emit({type: 'event', id: eventDetails.id.toString(), name: `${eventDetails.homeTeam.name} vs ${eventDetails.awayTeam.name}`});
+      this.onSelected.emit({type: ECrumbData.EVENT, id: eventDetails.id.toString(), name: `${eventDetails.homeTeam.name} vs ${eventDetails.awayTeam.name}`});
     }, error => {
       this.error = true;
     });

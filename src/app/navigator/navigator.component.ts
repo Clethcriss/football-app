@@ -1,5 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { HttpService } from '../service/http.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navigator',

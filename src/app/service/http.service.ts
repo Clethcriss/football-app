@@ -78,33 +78,4 @@ export class HttpService {
       }
     }));
   }
-
-  fetchEventTeamsAndCompetitionName(eventId) {
-    return this.http.get(
-      `${environment.apiUrl}/matches/${eventId}`, {
-        headers: this.headers
-      }
-    ).pipe(map(matchData => {
-      if (matchData.hasOwnProperty('match')) {
-        const homeTeam = matchData['match']['homeTeam']['name'];
-        const awayTeam = matchData['match']['awayTeam']['name'];
-        const competitionName = matchData['match']['competition']['name'];
-        return {
-          vsTeams: `${homeTeam} vs ${awayTeam}`,
-          competitionName: competitionName
-        }
-      }
-    }));
-  }
-
-  fetchCompetitionName(competitionId) {
-    return this.http.get(
-      `${environment.apiUrl}/competitions/${competitionId}`, {
-        headers: this.headers
-      }
-    ).pipe(map(responseData => {
-      const competitionName = responseData['name'];
-      return competitionName;
-    }));
-  }
 }
