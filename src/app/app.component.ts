@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ECrumbData, ICrumbData } from './models/crumbData.interface';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'football-app';
-  homeLink = {type: 'home', id: '', name: 'Competitions'};
-  links: {type: string; id: string; name: string}[] = [this.homeLink];
+  homeLink = {type: ECrumbData.HOME, id: '', name: 'Competitions'};
+  links: ICrumbData[] = [this.homeLink];
 
 
   constructor() {
@@ -16,15 +17,14 @@ export class AppComponent {
 
   onActive(elementRef) {
     elementRef.onSelected.subscribe(event => {
-      console.log(event.type);
       switch (event.type) {
-        case 'competition':
+        case ECrumbData.COMPETITION:
           this.links = [this.homeLink, event];
           break;
-        case 'event':
+        case ECrumbData.EVENT:
           this.links.push(event);
           break;
-        case 'home':
+        case ECrumbData.HOME:
           this.links = [event];
       }
     })
